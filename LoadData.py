@@ -14,7 +14,9 @@ def load_data():
     count = 0
     for file in files:
         print(f'Processing file: {file}')
-        file = "/Users/daniellykke/PycharmProjects/quickdraw/data/" + file # Hardcoded for now..
+
+        # TODO Temporary Hardcoded file path
+        file = "/quickdraw/data/" + file
         x = np.load(file)
         x = x.astype('float32') / 255.
         x = x[0:10000, :]

@@ -1,12 +1,12 @@
+import pickle
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
-from keras.layers import Dense,Flatten, Conv2D
+from keras.layers import Dense, Flatten, Conv2D
 from keras.layers import MaxPooling2D, Dropout
-from keras.utils import np_utils, print_summary
+from keras import utils
 from keras.models import Sequential
 from keras.callbacks import ModelCheckpoint
-import pickle
 from keras.callbacks import TensorBoard
 
 def keras_model(image_x, image_y):
@@ -25,7 +25,7 @@ def keras_model(image_x, image_y):
     model.add(Dense(num_of_classes, activation='softmax'))
 
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-    filepath = "models/QuickDraw.h5"
+    filepath = "models/drawModel.h5"
     checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
     callbacks_list = [checkpoint]
 
@@ -48,7 +48,7 @@ def augmentData(features, labels):
 
 
 def prepress_labels(labels):
-    labels = np_utils.to_categorical(labels)
+    labels = utils.to_categorical(labels)
     return labels
 
 
@@ -62,10 +62,10 @@ def main():
     train_x = train_x.reshape(train_x.shape[0], 28, 28, 1)
     test_x = test_x.reshape(test_x.shape[0], 28, 28, 1)
     model, callbacks_list = keras_model(28,28)
-    print_summary(model)
+    model.summary()
     model.fit(train_x, train_y, validation_data=(test_x, test_y), epochs=3, batch_size=64,
-              callbacks=[TensorBoard(log_dir="QuickDraw")])
-    model.save('models/QuickDraw.h5')
+              callbacks=[TensorBoard(log_dir="logs")])
+    model.save('models/qdModel.h5')
 
 
 main()

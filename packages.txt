@@ -5,3 +5,4 @@ keras
 pandas
 h5py
 scipy
+np_utils
