@@ -16,6 +16,7 @@ def main():
     digit = np.zeros((200, 200, 3), dtype=np.uint8)
     pred_class = 0
 
+    # While camera is opened
     while (cap.isOpened()):
 
         a = 300

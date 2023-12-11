@@ -32,6 +32,7 @@ def keras_model(image_x, image_y):
     return model, callbacks_list
 
 
+# Get the data from pickle storage
 def loadFromPickle():
     with open("features", "rb") as f:
         features = np.array(pickle.load(f))

@@ -10,6 +10,7 @@ y = []
 y_load = []
 
 
+# Goes through each .npy file in data folder
 def load_data():
     count = 0
     for file in files:
@@ -35,7 +36,7 @@ labels = np.array(labels).astype('float32')
 features=features.reshape(features.shape[0]*features.shape[1],features.shape[2])
 labels=labels.reshape(labels.shape[0]*labels.shape[1],labels.shape[2])
 
-
+# Dump files feature and labels for later use
 with open("features", "wb") as f:
     pickle.dump(features, f, protocol=4)
 with open("labels", "wb") as f:
